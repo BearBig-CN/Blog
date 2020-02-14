@@ -6,20 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.bearbig.top">
-  <title>kubernetes配置yum源 | 程序猿BB的博客</title>
+  <title>centOS解决不在sudoers文件中的问题 | 程序猿BB的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="cat &lt;&lt;EOF &gt; kubernetes.repo [kubernetes] name&#x3D;Kubernetes baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64 enabled&#x3D;1 gpgcheck&#x3D;1 repo_gpgcheck&#x3D;1 gpgkey&#x3D;https:&#x2F;&#x2F;mirr">
+  <meta name="description" content="linux系统中非root用户执行 sudo command 提示：”xxxx不在sudoers中，此事将被报告. “  的解决方案。 1、首先修改文件权限为可写可执行 1# chmod 330 &#x2F;etc&#x2F;sudoers 2、编辑&#x2F;etc&#x2F;sudoers文件，在root语句下面中添加以下语句后(userName为需要授权用户的登录名，请根据实际情况修改)，保存并退出. 123r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kubernetes配置yum源">
-<meta property="og:url" content="http://blog.bearbig.top/2020/02/14/kubernetes%E9%85%8D%E7%BD%AEyum%E6%BA%90/index.html">
+<meta property="og:title" content="centOS解决不在sudoers文件中的问题">
+<meta property="og:url" content="http://blog.bearbig.top/2020/02/14/centOS%E8%A7%A3%E5%86%B3%E4%B8%8D%E5%9C%A8sudoers%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="程序猿BB的博客">
-<meta property="og:description" content="cat &lt;&lt;EOF &gt; kubernetes.repo [kubernetes] name&#x3D;Kubernetes baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64 enabled&#x3D;1 gpgcheck&#x3D;1 repo_gpgcheck&#x3D;1 gpgkey&#x3D;https:&#x2F;&#x2F;mirr">
+<meta property="og:description" content="linux系统中非root用户执行 sudo command 提示：”xxxx不在sudoers中，此事将被报告. “  的解决方案。 1、首先修改文件权限为可写可执行 1# chmod 330 &#x2F;etc&#x2F;sudoers 2、编辑&#x2F;etc&#x2F;sudoers文件，在root语句下面中添加以下语句后(userName为需要授权用户的登录名，请根据实际情况修改)，保存并退出. 123r">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-14T12:07:25.000Z">
-<meta property="article:modified_time" content="2020-02-14T14:06:26.655Z">
+<meta property="article:published_time" content="2020-02-14T14:08:59.000Z">
+<meta property="article:modified_time" content="2020-02-14T14:40:02.592Z">
 <meta property="article:author" content="程序猿BB">
-<meta property="article:tag" content="mirroring">
-<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="permission">
+<meta property="article:tag" content="sudoers">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="程序猿BB的博客" type="application/atom+xml">
@@ -156,37 +157,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-kubernetes配置yum源" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-centOS解决不在sudoers文件中的问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      kubernetes配置yum源
+      centOS解决不在sudoers文件中的问题
     </h1>
   
 
         
-        <a href="/2020/02/14/kubernetes%E9%85%8D%E7%BD%AEyum%E6%BA%90/" class="archive-article-date">
-  	<time datetime="2020-02-14T12:07:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-14</time>
+        <a href="/2020/02/14/centOS%E8%A7%A3%E5%86%B3%E4%B8%8D%E5%9C%A8sudoers%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-02-14T14:08:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>cat &lt;&lt;EOF &gt; kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-EOF
+        <p>linux系统中<b>非root</b>用户执行 sudo command 提示：”xxxx不在sudoers中，此事将被报告. “  的解决方案。</p>
+<p>1、首先修改文件权限为可写可执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># chmod 330 &#x2F;etc&#x2F;sudoers</span><br></pre></td></tr></table></figure>
+<p>2、编辑/etc/sudoers文件，在root语句下面中添加以下语句后(userName为需要授权用户的登录名，请根据实际情况修改)，保存并退出.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root		ALL&#x3D;(ALL)	ALL</span><br><span class="line">## 新增以下语句</span><br><span class="line">userName	ALL&#x3D;(ALL)	ALL</span><br></pre></td></tr></table></figure>
+<p>3、最后将权限改为只读：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># chmod 440 &#x2F;etc&#x2F;sudoers</span><br></pre></td></tr></table></figure>
+<p>4、配置完成，XXX用户重新登录并重新执行sudo command命令就不会再提示以上错误了。</p>
+<p>备注：linux权限系统中，4表示可读，2表示可写，1表示可执行，比如：330其实是表示的3个组的权限，第一个3表示是当前文件所属用户的权限为可写可执行(2+1)，第二个3表示的是用户所属的权限组的权限也是可写可执行(2+1), 最后一个0表示的是其他权限组的权限为不可读不可写不可执行。</p>
 
-sudo mv kubernetes.repo /etc/yum.repos.d/</code></pre>
       
 
       
@@ -220,11 +220,15 @@ sudo mv kubernetes.repo /etc/yum.repos.d/</code></pre>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mirroring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">kubernetes</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">permission</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sudoers</a>
         		</li>
       		
 		</ul>
@@ -280,7 +284,7 @@ sudo mv kubernetes.repo /etc/yum.repos.d/</code></pre>
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://blog.bearbig.top/2020/02/14/kubernetes%E9%85%8D%E7%BD%AEyum%E6%BA%90/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://blog.bearbig.top/2020/02/14/centOS%E8%A7%A3%E5%86%B3%E4%B8%8D%E5%9C%A8sudoers%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +298,18 @@ sudo mv kubernetes.repo /etc/yum.repos.d/</code></pre>
   
 <nav id="article-nav">
   
-    <a href="/2020/02/14/centOS%E8%A7%A3%E5%86%B3%E4%B8%8D%E5%9C%A8sudoers%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/14/centOS%E5%AE%89%E8%A3%85docker/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          centOS解决不在sudoers文件中的问题
+          centOS安装docker
         
       </div>
     </a>
   
   
-    <a href="/2020/01/04/Mac%E4%BF%AE%E6%94%B9pip%E9%95%9C%E5%83%8F%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">修改pip镜像源</div>
+    <a href="/2020/02/14/kubernetes%E9%85%8D%E7%BD%AEyum%E6%BA%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">kubernetes配置yum源</div>
       <i class="icon-circle-right"></i>
     </a>
   
